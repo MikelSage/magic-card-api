@@ -14,7 +14,7 @@ class Card
     @id = attrs[:id]
     @name = attrs[:name]
     @mana_cost = attrs[:manaCost]
-    @converted_mana_cost = attrs[:cmc]
+    @converted_mana_cost = attrs[:cmc].to_i
     @power = attrs[:power]
     @toughness = attrs[:toughness]
     @types = attrs[:types]

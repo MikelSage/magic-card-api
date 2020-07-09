@@ -6,9 +6,15 @@ RSpec.describe "Api::V1::Cards", type: :request do
       VCR.use_cassette('/requests/index_no_params') do
         get api_v1_cards_path
 
-        result = JSON.parse(response.body).symbolize_keys
+        result = JSON.parse(response.body).deep_symbolize_keys
+        example_card = result[:data].first
 
         expect(response).to have_http_status(:success)
+        expect(result[:data].count).to eq 100 # max number of cards returned by MTG API
+        expect(example_card).to have_key :id
+        expect(example_card[:id]).to be_a String
+        expect(example_card[:attributes]).to have_key :convertedManaCost
+        expect(example_card[:attributes][:convertedManaCost]).to be_a Integer
       end
     end
 
