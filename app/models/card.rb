@@ -1,6 +1,7 @@
 # PORO for dealing with Cards from MTG API
 class Card
-  attr_reader :name,
+  attr_reader :id,
+              :name,
               :mana_cost,
               :converted_mana_cost,
               :power,
