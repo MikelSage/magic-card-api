@@ -2,7 +2,7 @@
 class Card
   attr_reader :name,
               :mana_cost,
-              :converter_mana_cost,
+              :converted_mana_cost,
               :power,
               :toughness,
               :types,
@@ -10,6 +10,7 @@ class Card
               :colors
 
   def initialize(attrs)
+    @id = attrs[:id]
     @name = attrs[:name]
     @mana_cost = attrs[:manaCost]
     @converted_mana_cost = attrs[:cmc]
