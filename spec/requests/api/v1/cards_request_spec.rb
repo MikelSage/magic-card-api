@@ -19,7 +19,15 @@ RSpec.describe "Api::V1::Cards", type: :request do
     end
 
     it 'returns a list of cards with filtered by name' do
+      VCR.use_cassette('/requests/index_filter_by_name') do
+        get '/api/v1/cards?name=jace'
 
+        result = JSON.parse(response.body).deep_symbolize_keys
+
+        expect(response).to have_http_status(:success)
+        expect(result[:data].count).not_to eq 0
+        expect(result[:data]).to all(include(attributes: a_hash_including(:name => a_string_matching(/jace/i))))
+      end
     end
 
     it 'returns a list of cards filtered by color' do
