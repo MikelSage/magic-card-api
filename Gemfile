@@ -50,6 +50,7 @@ end
 group :test do
   # Record HTTP requests in testing, playback for deterministic tests
   gem 'vcr'
+  gem 'webmock'
 end
 
 
