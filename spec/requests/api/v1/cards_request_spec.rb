@@ -77,7 +77,12 @@ RSpec.describe "Api::V1::Cards", type: :request do
 
     context 'errors' do
       it 'returns valid JSON when passed invalid parameters' do
+        get '/api/v1/cards?sname=jace' # misspelled name parameter
 
+        result = JSON.parse(response.body).deep_symbolize_keys
+        expect(response).to have_http_status(400)
+        expect(result).to have_key :errors
+        expect(result[:errors].first[:detail]).to be_a String
       end
     end
   end
