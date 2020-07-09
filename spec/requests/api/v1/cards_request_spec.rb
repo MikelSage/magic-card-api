@@ -26,12 +26,28 @@ RSpec.describe "Api::V1::Cards", type: :request do
 
         expect(response).to have_http_status(:success)
         expect(result[:data].count).not_to eq 0
-        expect(result[:data]).to all(include(attributes: a_hash_including(:name => a_string_matching(/jace/i))))
+        expect(result[:data]).to all(include(
+          attributes: a_hash_including(
+            :name => a_string_matching(/jace/i)
+          )
+        ))
       end
     end
 
     it 'returns a list of cards filtered by color' do
+      VCR.use_cassette('/requests/index_filter_by_color') do
+        get '/api/v1/cards?colors=white,blue'
 
+        result = JSON.parse(response.body).deep_symbolize_keys
+
+        expect(response).to have_http_status(:success)
+        expect(result[:data].count).not_to eq 0
+        expect(result[:data]).to all(include(
+          attributes: a_hash_including(
+            :colors => a_collection_including("White", "Blue")
+          )
+        ))
+      end
     end
 
     it 'returns a list of cards filtered by color and sorted by name' do
