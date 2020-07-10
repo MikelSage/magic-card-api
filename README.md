@@ -1,6 +1,6 @@
 # Magic Card API
 
-A small Rails API that consumes data related to cards from a [Magic The Gather API](https://magicthegathering.io/) and allows search functionality.
+A small Rails API that consumes data related to cards from a [Magic The Gathering API](https://magicthegathering.io/) and allows search functionality.
 
 ## Dependencies
 ```
