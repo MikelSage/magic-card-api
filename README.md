@@ -18,7 +18,7 @@ $ rails server
 and the endpoints will be accessible at `localhost:3000/api/v1/...`
 
 ## Hosted Instance
-This API is hosted on a free Heroku instance that can be accessed [here]()
+This API is hosted on a free Heroku instance that can be accessed [here](https://magic-card-api-test.herokuapp.com/api/v1/cards)
 
 ## Endpoints
 There is currently no authentication with this API
