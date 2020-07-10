@@ -3,8 +3,7 @@ class CardSerializer
 
   set_key_transform :camel_lower
 
-  attributes :id,
-             :name,
+  attributes :name,
              :mana_cost,
              :converted_mana_cost,
              :power,

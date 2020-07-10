@@ -33,7 +33,7 @@ class MagicCardApiService
   private
 
     def all_parameters_valid?
-      allowed_params = %w[name colors mana_cost cmc power toughness orderBy page pageSize]
+      allowed_params = %w[name colors mana_cost cmc power toughness rarity types orderBy page pageSize]
       # extremely contrived way to raise error, couldn't think of another way in time constraints
       @query.to_unsafe_hash.except('action', 'controller').all? do |param_name, _param_value|
         allowed_params.include?(param_name)
