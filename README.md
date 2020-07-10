@@ -1,24 +1,69 @@
-# README
+# Magic Card API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A small Rails API that consumes data related to cards from a [Magic The Gather API](https://magicthegathering.io/) and allows search functionality.
 
-Things you may want to cover:
+## Dependencies
+```
+ruby >= 2.5
+rails >= 5
+```
 
-* Ruby version
+## Setting Up Locally
+After cloning the repository, run
+```bash
+$ rails db:{create,migrate}
+$ rails server
+```
 
-* System dependencies
+and the endpoints will be accessible at `localhost:3000/api/v1/...`
 
-* Configuration
+## Hosted Instance
+This API is hosted on a free Heroku instance that can be accessed [here]()
 
-* Database creation
+## Endpoints
+There is currently no authentication with this API
 
-* Database initialization
+### API/V1/CARDS
+Verb: **GET**
+An endpoint returning a collection of cards that is filterable and sortable
 
-* How to run the test suite
+#### Parameters
 
-* Services (job queues, cache servers, search engines, etc.)
+---
 
-* Deployment instructions
+|Parameter|Description|
+|---|---|
+|name|The name of the card, can be partial searched|
+|colors|The colors of the card. Can be searched with comma delineated params. values: `[white,blue,red,green,black]`|
+|cmc| A card's converted mana cost. Always a number|
+|power| The card's power (basically damage potential). Only present for creatures.|
+|toughness|The card's toughness (basically survivability). Only present for creatures.|
+|types| The card's different types as an array|
+|rarity| The rarity of the card|
+|orderBy|The field that the results will be ordered by|
+|page|The page of results to request|
+|pageSize|The amount of cards to return in a single request. Defaults to the maximum of 100|
 
-* ...
+#### Response
+```JSON
+{
+  "data": [
+    {
+      "id": "6b0e48c0-441d-5a62-a558-3c99473e4387",
+      "type": "card",
+      "attributes": {
+        "name": "Coalition Victory",
+        "manaCost": "{3}{W}{U}{B}{R}{G}",
+        "convertedManaCost": 8,
+        "types": ["Sorcery"],
+        "power": null,
+        "toughness": null,
+        "rarity": "Rare",
+        "colors": ["Black","Green","Red","Blue","White"]
+      }
+    },
+    {...},
+    {...}
+  ]
+}
+```
